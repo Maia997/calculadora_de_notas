@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <iomanip>
 #include "Aluno.h"
 
@@ -35,35 +36,57 @@ float Aluno::calcFaltas(){
 
 bool Aluno::validaNota(float nota){
     if(nota >= 0 && nota <= 10)
-        return true;
-    else
         return false;
+    else
+        return true;
 }
 
 void Aluno::situacaoAtual(){
     
-
-    if(this->Media_Final > 5.0 && getPresenca() >= 75){
-        cout <<"MEDIA FINAL: "<< this->Media_Final << endl;
-        printf("\nAPROVADO");
-    }
-    else{
-        cout <<"MEDIA FINAL: "<< this->Media_Final << endl;
-        printf("\nREPROVADO");
-    }
-
+    if(getPresenca() >= 75){
+    	if(this->Media_Final >= 5){
+    		cout<< "MEDIA FINAL: "<< this->Media_Final << endl;
+			cout<< "\n\t*************************"<<endl;
+        	cout<< "\t\tAPROVADO!"<<endl;
+			cout<< "\n\t*************************"<<endl;
+		}else if(this->Media_Final < 3.0){
+			cout<< "MEDIA FINAL: "<< this->Media_Final << endl;
+        	cout<< "\n\t*************************"<<endl;
+			cout<< "\t\tREPROVADO POR NOTA"<<endl;;
+			cout<< "\n\t*************************"<<endl;
+		}else{
+			cout<< "MEDIA FINAL: "<< this->Media_Final << endl;
+			cout<< "\n\t*************************"<<endl;
+        	cout<< "\t\tRE"<<endl;
+			cout<< "\n\t*************************"<<endl;
+		}
+	}else{
+		cout<< "MEDIA FINAL: "<< this->Media_Final << endl;
+        cout<< "\nREPROVADO POR FALTA"<<endl;
+	}
 }
 
 void Aluno::imprimeNota(){
-
-    cout <<"NOTA P1: "<< this->Media_P1 << endl;
-    cout <<"NOTA P1: "<< this->Media_P2 << endl;
-    cout << setprecision(2) <<"PRESENCA: " << this->presenca << "%" <<endl;
+	cout<<"***************MEDIAS FINAIS***************"<<endl;
+    cout<< "NOTA P1: "<< this->Media_P1 << endl;
+    cout<< "NOTA P2: "<< this->Media_P2 << endl;
+    cout<< setprecision(2) <<"PRESENCA: " << this->presenca << "%" <<endl;
     situacaoAtual();
-    
+
 }
 
-//getter and setter
+//getters and setters
+
+float Aluno::setData(char *ask){
+	float data;
+	do{
+		cout << ask << ": ";
+		cin >> data;
+	}while(this->validaNota(data));
+	
+	return data;
+}
+
 
 void Aluno::setP1(float P1){ this->P1 = P1;}
 float Aluno::getP1(){return this->P1;}
@@ -89,16 +112,33 @@ float Aluno::getMedia_P1(){return this->Media_P1;}
 void Aluno::setMedia_P2(float Media_P2){ this->Media_P2 = Media_P2;}
 float Aluno::getMedia_P2(){return this->Media_P2;}
 
-void Aluno::setQtdAulas(float QtdAulas){ this->qtdAulas = QtdAulas;}
+void Aluno::setQtdAulas(int QtdAulas){
+	if(QtdAulas > 0){
+		this->qtdAulas = QtdAulas;
+	}else{
+		cout << "\nDigite a quantidade de Aulas: ";
+		int aulas;
+		cin >> aulas;
+		this->setQtdAulas(aulas);
+	}
+}
+
 float Aluno::getQtdAulas(){return this->qtdAulas;}
 
-void Aluno::setQtdFaltas(float QtdFaltas){ this->qtdFaltas = QtdFaltas;}
+void Aluno::setQtdFaltas(int QtdFaltas){ 
+	if(QtdFaltas >= 0 && QtdFaltas <= getQtdAulas()){
+		this->qtdFaltas = QtdFaltas;
+	}else{
+		cout << "\nDigite a quantidade de faltas: ";
+		int faltas;
+		cin >> faltas;
+		this->setQtdFaltas(faltas);
+	}
+}
+
 float Aluno::getQtdFaltas(){return this->qtdFaltas;}
 
 float Aluno::getPresenca(){return this->presenca;}
-
-
-
 
 
 

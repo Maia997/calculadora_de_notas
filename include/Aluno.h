@@ -12,6 +12,7 @@
         float Media_P1;
         float Media_P2;
         float Media_Final;
+
         
         int qtdAulas;
         int qtdFaltas;
@@ -21,11 +22,11 @@
         ~Aluno();
 
         float calcMedia();   //Calcula nota final do semestre
-        float calcFaltas(); //Calcula percentual de faltas no semestre
-        void situacaoAtual();
-        void imprimeNota();
-        bool validaNota(float);
-
+        float calcFaltas();  //Calcula percentual de faltas no semestre
+        void situacaoAtual();//Valida a aprovação
+        void imprimeNota(); //imprime as notas
+        bool validaNota(float); //valida a as notas
+        
     //getters and setters
         void setP1(float);
         float getP1();       
@@ -39,17 +40,18 @@
         float getMa2();        
         void setMb2(float);
         float getMb2();
-        void setQtdAulas(float QtdAulas);
+        void setQtdAulas(int QtdAulas);
         float getQtdAulas();
-        void setQtdFaltas(float QtdFaltas);
+        void setQtdFaltas(int QtdFaltas);
         float getQtdFaltas();
-    
-        protected:       
+        float setData(char[50]); 
         void setMedia_P1(float);
         float getMedia_P1();
         void setMedia_P2(float);
         float getMedia_P2();
         float getPresenca();
+
+    
     };
 
 
